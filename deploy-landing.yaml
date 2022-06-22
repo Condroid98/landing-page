@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing-page
+  namespace: deployment
+  labels:
+    app: landing-page
+    name : landing-page
+    keel.sh/policy: major  
+    keel.sh/trigger: poll  
+#    keel.sh/approvals: "1" 
+spec:	
+  selector:
+    matchLabels:
+      app: landing-page
+  template:
+    metadata:
+      labels:
+        app: landing-page
+    spec:
+      containers:
+      - name: landing-page
+        image: hiro99/landingmulti:0.0.4-dev
+        ports:
+        - containerPort: 80
