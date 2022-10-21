@@ -11,7 +11,7 @@ pipeline {
             sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-dev .'
                 }
                 else if (env.BRANCH_NAME == 'staging') {
-            sh 'docker build -t hiro99/landingmulti:0.0-$BUILD_NUMBER-staging .'
+            sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-staging .'
                 }
                 else if (env.BRANCH_NAME == 'production') {
             sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-prod .'   
