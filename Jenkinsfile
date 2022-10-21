@@ -11,7 +11,7 @@ pipeline {
             sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-dev .'
                 }
                 else if (env.BRANCH_NAME == 'staging') {
-            sh 'docker build -t hiro99/landingmulti:0.0-$BUILD_NUMBER-staging .'
+            sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-staging .'
                 }
                 else if (env.BRANCH_NAME == 'production') {
             sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-prod .'   
@@ -44,13 +44,13 @@ pipeline {
 }
         post {
             success {
-                slackSend channel: '#random',
+                slackSend channel: '#testbot',
                 color: 'good',
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
             }    
 
             failure {
-                slackSend channel: '#random',
+                slackSend channel: '#testbot',
                 color: 'danger',
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
                 }
