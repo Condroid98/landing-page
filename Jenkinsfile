@@ -7,14 +7,11 @@ pipeline {
     stage('Build Image') {
         steps {
             script {
-                if (env.BRANCH_NAME == 'development') {                     
-            sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-dev .'
-                }
-                else if (env.BRANCH_NAME == 'staging') {
-            sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-staging .'
+                if (env.BRANCH_NAME == 'staging') {
+            sh 'docker build -t hiro99/landing:0.0.$BUILD_NUMBER-stg .'
                 }
                 else if (env.BRANCH_NAME == 'production') {
-            sh 'docker build -t hiro99/landingmulti:0.0.$BUILD_NUMBER-prod .'   
+            sh 'docker build -t hiro99/landing:0.0.$BUILD_NUMBER-prod .'   
                }
                 else {
                     sh 'echo Nothing to Build'
@@ -25,14 +22,11 @@ pipeline {
     stage('Push to Registry') {
         steps {
             script {
-             if (env.BRANCH_NAME == 'development') {
-            sh 'docker push hiro99/landingmulti:0.0.$BUILD_NUMBER-dev'
-                }
-                else if (env.BRANCH_NAME == 'staging') {
-            sh 'docker push hiro99/landingmulti:0.0.$BUILD_NUMBER-staging' 
+                if (env.BRANCH_NAME == 'staging') {
+            sh 'docker push hiro99/landing:0.0.$BUILD_NUMBER-stg' 
                 }
                 else if (env.BRANCH_NAME == 'production') {
-            sh 'docker push hiro99/landingmulti:0.0.$BUILD_NUMBER-prod'
+            sh 'docker push hiro99/landing:0.0.$BUILD_NUMBER-prod'
                }
                 else {
                     sh 'echo Nothing to Build'
